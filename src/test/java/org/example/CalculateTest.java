@@ -36,7 +36,7 @@ class CalculateTest {
     }
 
     @Test
-    void testCompareAverage() {
+    void testCompareAverageFirstLess() {
         int[] list1 = {1, 2, 3, 4, 5};
         int[] list2 = {6, 7, 8, 9, 10};
         String expectedOutput = "Второй список имеет большее среднее значение";
@@ -59,6 +59,25 @@ class CalculateTest {
         int[] list1 = {1, 2, 3, 4, 5};
         int[] list2 = {1, 2, 3, 4, 5};
         String expectedOutput = "Средние значения равны";
+
+        // Redirect System.out to a PrintStream
+        PrintStream originalOut = System.out;
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+
+        calculate.CompareAverage(list1, list2);
+
+        // Restore System.out
+        System.setOut(originalOut);
+
+        assertEquals(expectedOutput, outContent.toString().trim());
+    }
+
+    @Test
+    void testCompareAverageSecondLess() {
+        int[] list1 = {6, 7, 8, 9, 10};
+        int[] list2 = {1, 2, 3, 4, 5};
+        String expectedOutput = "Первый список имеет большее среднее значение";
 
         // Redirect System.out to a PrintStream
         PrintStream originalOut = System.out;
